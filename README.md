@@ -1,9 +1,14 @@
 # Date
 
-Provides a data type that represents a date.
+Provides a data type `date.Date` that represents a date.
 
-Dates are lightweight to pass around, since they are represented using a single
-integer (the number of days since the 1st of Jan, 1970).
+Under the hood, a `date.Date` is an integer type that represents the number of
+days since the epoch date 1st Jan 1970.
 
-Date related functions in the `time` package are leveraged for most of the
-functionality.
+This means that `date.Date`s are easy to understand and cheap to pass around.
+
+`date.Date` leverages much of its functionality from the `time` package.
+
+## Examples
+
+TODO
