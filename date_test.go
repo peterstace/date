@@ -52,6 +52,43 @@ func TestDate(t *testing.T) {
 			"2017-03-01", // Feb 2016 has 31 days, but Feb 2017 has 28 days, so normalises.
 			MustFromString("2016-02-29").AddYears(1),
 		},
+		{
+			"1999-12-25",
+			MustFromString("1999-12-26").AddDays(-1),
+		},
+		{
+			"1999-12-25",
+			MustFromString("1999-12-24").AddDays(1),
+		},
+		{
+			"2022-11-01",
+			MustFromString("2022-11-15").StartOfMonth(),
+		},
+		{
+			"2022-12-01",
+			MustFromString("2022-12-15").StartOfMonth(),
+		},
+		{
+			"2022-01-01",
+			MustFromString("2022-01-15").StartOfMonth(),
+		},
+		{
+			"2022-01-01",
+			MustFromString("2022-01-15").StartOfQuarter(),
+		},
+		{
+			"2023-01-01",
+			MustFromString("2022-12-15").StartOfNextQuarter(),
+		},
+		{
+			"2022-07-01",
+			MustFromString("2022-06-15").StartOfNextQuarter(),
+		},
+
+		{"4", MustFromString("2015-03-04").Day()},
+		{"March", MustFromString("2015-03-04").Month()},
+		{"2015", MustFromString("2015-03-04").Year()},
+		{"63", MustFromString("2015-03-04").YearDay()},
 	} {
 		if gotStr := fmt.Sprintf("%v", test.got); gotStr != test.want {
 			t.Errorf("i=%d got=%v want=%v", i, gotStr, test.want)
