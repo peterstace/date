@@ -1,7 +1,10 @@
 package date
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 )
@@ -99,5 +102,31 @@ func TestDate(t *testing.T) {
 func TestFromStringErr(t *testing.T) {
 	if _, err := FromString("not a date"); err == nil {
 		t.Error("expected error")
+	}
+}
+
+func TestJSON(t *testing.T) {
+	type J struct {
+		D Date `json:"d"`
+	}
+	j := J{MustFromString("2015-05-21")}
+
+	var buf bytes.Buffer
+	err := json.NewEncoder(&buf).Encode(j)
+	if err != nil {
+		t.Fatalf("Could not encode: %v", err)
+	}
+	if want := `{"d":"2015-05-21"}`; strings.TrimSpace(buf.String()) != want {
+		t.Fatalf("Did not encode correctly, want=%q got=%q",
+			want, strings.TrimSpace(buf.String()))
+	}
+
+	j = J{}
+	err = json.NewDecoder(&buf).Decode(&j)
+	if err != nil {
+		t.Fatalf("Could not decode: %v", err)
+	}
+	if want := MustFromString("2015-05-21"); j.D != want {
+		t.Fatalf("Did not decode correctly, want=%q got=%q", want, j.D)
 	}
 }
