@@ -1,4 +1,4 @@
-package main
+package date
 
 import (
 	"fmt"
@@ -16,6 +16,25 @@ type Date int
 func FromTime(t time.Time) Date {
 	t = time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.UTC)
 	return Date(t.Unix() / (60 * 60 * 24))
+}
+
+// FromString creates a date from its ISO8601 (YYYY-MM-DD) representation.
+func FromString(str string) (Date, error) {
+	t, err := time.Parse("2006-01-02", str)
+	if err != nil {
+		return 0, err
+	}
+	return FromTime(t), nil
+}
+
+// MustFromString creates a date from its ISO8601 (YYYY-MM-DD) representation.
+// It panics if str is not in the right format.
+func MustFromString(str string) Date {
+	d, err := FromString(str)
+	if err != nil {
+		panic(err)
+	}
+	return d
 }
 
 // String returns the ISO8601 representation (YYYY-MM-DD).
@@ -46,7 +65,7 @@ func (d Date) AddMonths(months int) Date {
 // AddYears adds the number of specified years to create a new date. Dates are
 // normalized in the same way as `AddDate` in the `time` package.
 func (d Date) AddYears(years int) Date {
-	return FromTime(d.Time().AddDate(0, 0, years))
+	return FromTime(d.Time().AddDate(years, 0, 0))
 }
 
 // AddDays adds the number of specified days to create a new date. Since Dates
