@@ -1,6 +1,7 @@
 package date
 
 import (
+	"database/sql/driver"
 	"fmt"
 	"time"
 )
@@ -146,4 +147,21 @@ func (d *Date) UnmarshalJSON(p []byte) error {
 	var err error
 	*d, err = FromString(string(p)[1 : len(p)-1])
 	return err
+}
+
+// Scan implements the sql.Scanner interface, allowing the sql package to read
+// sql dates into Date.
+func (d *Date) Scan(src interface{}) error {
+	t, ok := src.(time.Time)
+	if !ok {
+		return fmt.Errorf("can not scan as Date: %T", src)
+	}
+	*d = FromTime(t)
+	return nil
+}
+
+// Value implements the driver.Valuer interface, allowing sql drivers to send
+// Dates to sql databases.
+func (d Date) Value() (driver.Value, error) {
+	return d.String(), nil
 }
