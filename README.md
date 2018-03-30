@@ -1,6 +1,8 @@
 # Date
 
 [![Build Status](https://travis-ci.org/peterstace/date.svg?branch=master)](https://travis-ci.org/peterstace/date)
+[![Documentation](https://godoc.org/github.com/peterstace/date?status.svg)](http://godoc.org/github.com/peterstace/date)
+[![Coverage Status](https://coveralls.io/repos/github/peterstace/date/badge.svg?branch=master)](https://coveralls.io/github/peterstace/date?branch=master)
 
 Provides a data type `date.Date` that represents a date.
 
