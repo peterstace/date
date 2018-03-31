@@ -157,7 +157,7 @@ func (d Date) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON unmarshals a JSON string in the ISO8601 format into a date.
 func (d *Date) UnmarshalJSON(p []byte) error {
 	if len(p) < 2 || p[0] != '"' || p[len(p)-1] != '"' {
-		return fmt.Errorf("could not unmarshal JSON: not a string")
+		return fmt.Errorf("could not unmarshal JSON into Date: value is not a string")
 	}
 	var err error
 	*d, err = FromString(string(p)[1 : len(p)-1])
