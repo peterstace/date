@@ -80,6 +80,10 @@ func TestDate(t *testing.T) {
 			MustFromString("2022-01-15").StartOfQuarter(),
 		},
 		{
+			"2022-01-01",
+			MustFromString("2022-02-15").StartOfQuarter(),
+		},
+		{
 			"2023-01-01",
 			MustFromString("2022-12-15").StartOfNextQuarter(),
 		},
