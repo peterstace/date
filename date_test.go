@@ -143,3 +143,23 @@ func TestJSON(t *testing.T) {
 		t.Fatalf("Did not decode correctly, want=%q got=%q", want, j.D)
 	}
 }
+
+func TestSQLScan(t *testing.T) {
+	var d Date
+	if err := d.Scan(time.Date(2013, time.July, 13, 0, 0, 0, 0, time.UTC)); err != nil {
+		t.Fatal(err)
+	}
+	if d != MustFromString("2013-07-13") {
+		t.Fatalf("Got=%v", d)
+	}
+}
+
+func TestSQLValue(t *testing.T) {
+	v, err := MustFromString("2013-07-13").Value()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if v != "2013-07-13" {
+		t.Fatalf("Got=%v", v)
+	}
+}
