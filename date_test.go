@@ -92,6 +92,19 @@ func TestDate(t *testing.T) {
 		{"March", MustFromString("2015-03-04").Month()},
 		{"2015", MustFromString("2015-03-04").Year()},
 		{"63", MustFromString("2015-03-04").YearDay()},
+
+		{
+			time.Now().Format("2006-01-02"),
+			Today(),
+		},
+		{
+			time.Now().Add(-24 * time.Hour).Format("2006-01-02"),
+			Yesterday(),
+		},
+		{
+			time.Now().Add(24 * time.Hour).Format("2006-01-02"),
+			Tomorrow(),
+		},
 	} {
 		if gotStr := fmt.Sprintf("%v", test.got); gotStr != test.want {
 			t.Errorf("i=%d got=%v want=%v", i, gotStr, test.want)

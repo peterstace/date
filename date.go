@@ -38,6 +38,21 @@ func MustFromString(str string) Date {
 	return d
 }
 
+// Today gives today's date.
+func Today() Date {
+	return FromTime(time.Now())
+}
+
+// Yesterday gives yesterday's date.
+func Yesterday() Date {
+	return Today() - 1
+}
+
+// Tomorrow gives tomorrow's date.
+func Tomorrow() Date {
+	return Today() + 1
+}
+
 // String returns the ISO8601 representation (YYYY-MM-DD).
 func (d Date) String() string {
 	t := d.Time()
