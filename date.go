@@ -114,12 +114,15 @@ func (d Date) StartOfNextQuarter() Date {
 	t := d.Time()
 	m := t.Month()
 	y := t.Year()
-	for !startOfQuarterMonth(m) {
+	for {
 		if m == time.December {
 			m = time.January
 			y++
 		} else {
 			m++
+		}
+		if startOfQuarterMonth(m) {
+			break
 		}
 	}
 	return FromTime(time.Date(y, m, 1, 0, 0, 0, 0, time.UTC))

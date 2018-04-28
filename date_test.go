@@ -91,6 +91,10 @@ func TestDate(t *testing.T) {
 			"2022-07-01",
 			MustFromString("2022-06-15").StartOfNextQuarter(),
 		},
+		{
+			"2022-07-01",
+			MustFromString("2022-04-22").StartOfNextQuarter(),
+		},
 
 		{"4", MustFromString("2015-03-04").Day()},
 		{"March", MustFromString("2015-03-04").Month()},
