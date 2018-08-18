@@ -147,6 +147,11 @@ func (d Date) Year() int {
 	return d.Time().Year()
 }
 
+// Weekday gives the day of the week that the date falls on.
+func (d Date) Weekday() time.Weekday {
+	return d.Time().Weekday()
+}
+
 // YearDay gives how many days into the year the date is (1-365).
 func (d Date) YearDay() int {
 	return d.Time().YearDay()

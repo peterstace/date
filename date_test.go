@@ -113,6 +113,10 @@ func TestDate(t *testing.T) {
 			time.Now().Add(24 * time.Hour).Format("2006-01-02"),
 			Tomorrow(),
 		},
+
+		{"Wednesday", MustFromString("1989-06-14").Weekday()},
+		{"Thursday", MustFromString("2014-12-25").Weekday()},
+		{"Saturday", MustFromString("2018-08-18").Weekday()},
 	} {
 		if gotStr := fmt.Sprintf("%v", test.got); gotStr != test.want {
 			t.Errorf("i=%d got=%v want=%v", i, gotStr, test.want)
