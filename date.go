@@ -28,6 +28,11 @@ func FromString(str string) (Date, error) {
 	return FromTime(t), nil
 }
 
+// New creates a day given a year, month, and day.
+func New(year int, month time.Month, day int) Date {
+	return FromTime(time.Date(year, month, day, 0, 0, 0, 0, time.UTC))
+}
+
 // MustFromString creates a date from its ISO8601 (YYYY-MM-DD) representation.
 // It panics if str is not in the right format.
 func MustFromString(str string) Date {
