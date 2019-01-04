@@ -122,6 +122,23 @@ func TestDate(t *testing.T) {
 			"2018-05-26",
 			New(2018, time.May, 26),
 		},
+
+		{
+			"2018-05-05",
+			Max(MustFromString("2018-05-05"), MustFromString("2018-01-01")),
+		},
+		{
+			"2018-05-05",
+			Max(MustFromString("2018-01-01"), MustFromString("2018-05-05")),
+		},
+		{
+			"2018-01-01",
+			Min(MustFromString("2018-05-05"), MustFromString("2018-01-01")),
+		},
+		{
+			"2018-01-01",
+			Min(MustFromString("2018-01-01"), MustFromString("2018-05-05")),
+		},
 	} {
 		if gotStr := fmt.Sprintf("%v", test.got); gotStr != test.want {
 			t.Errorf("i=%d got=%v want=%v", i, gotStr, test.want)

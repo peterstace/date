@@ -193,3 +193,21 @@ func (d *Date) Scan(src interface{}) error {
 func (d Date) Value() (driver.Value, error) {
 	return d.String(), nil
 }
+
+// Max finds the maximum date (furthest in the direction of the future) out of
+// the two given dates.
+func Max(d1, d2 Date) Date {
+	if d1 > d2 {
+		return d1
+	}
+	return d2
+}
+
+// Min finds the minimum date (furthest in the direction of the past) out of
+// the two given dates.
+func Min(d1, d2 Date) Date {
+	if d1 < d2 {
+		return d1
+	}
+	return d2
+}
