@@ -58,6 +58,21 @@ func Tomorrow() Date {
 	return Today() + 1
 }
 
+// TodayIn gives today's date in given timezone.
+func TodayIn(loc *time.Location) Date {
+	return FromTime(time.Now().In(loc))
+}
+
+// Yesterday gives yesterday's date in given timezone.
+func YesterdayIn(loc *time.Location) Date {
+	return TodayIn(loc) - 1
+}
+
+// Tomorrow gives tomorrow's date in given timezone.
+func TomorrowIn(loc *time.Location) Date {
+	return TodayIn(loc) + 1
+}
+
 // String returns the ISO8601 representation (YYYY-MM-DD).
 func (d Date) String() string {
 	t := d.Time()
