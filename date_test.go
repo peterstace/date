@@ -114,6 +114,19 @@ func TestDate(t *testing.T) {
 			Tomorrow(),
 		},
 
+		{
+			time.Now().In(Sydney).Format("2006-01-02"),
+			TodayIn(Sydney),
+		},
+		{
+			time.Now().In(Sydney).Add(-24 * time.Hour).Format("2006-01-02"),
+			YesterdayIn(Sydney),
+		},
+		{
+			time.Now().In(Sydney).Add(24 * time.Hour).Format("2006-01-02"),
+			TomorrowIn(Sydney),
+		},
+
 		{"Wednesday", MustFromString("1989-06-14").Weekday()},
 		{"Thursday", MustFromString("2014-12-25").Weekday()},
 		{"Saturday", MustFromString("2018-08-18").Weekday()},
