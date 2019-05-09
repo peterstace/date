@@ -76,6 +76,30 @@ func TestDate(t *testing.T) {
 			MustFromString("2022-01-15").StartOfMonth(),
 		},
 		{
+			"2022-11-30",
+			MustFromString("2022-11-01").EndOfMonth(),
+		},
+		{
+			"2022-12-31",
+			MustFromString("2022-12-15").EndOfMonth(),
+		},
+		{
+			"2022-01-31",
+			MustFromString("2022-01-31").EndOfMonth(),
+		},
+		{
+			"30",
+			MustFromString("2022-11-01").DaysInMonth(),
+		},
+		{
+			"31",
+			MustFromString("2022-12-15").DaysInMonth(),
+		},
+		{
+			"31",
+			MustFromString("2022-01-31").DaysInMonth(),
+		},
+		{
 			"2022-01-01",
 			MustFromString("2022-01-15").StartOfQuarter(),
 		},

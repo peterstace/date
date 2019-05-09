@@ -112,6 +112,16 @@ func (d Date) StartOfMonth() Date {
 	return FromTime(time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, time.UTC))
 }
 
+// EndOfMonth gives the date that is the last day of the current month.
+func (d Date) EndOfMonth() Date {
+	return d.StartOfMonth().AddMonths(1).AddDays(-1)
+}
+
+// DaysInMonth gives the number of days in the current month
+func (d Date) DaysInMonth() int {
+	return d.EndOfMonth().Day()
+}
+
 // StartOfQuarter gives the date that is the 1st day of the current quarter
 // (starting in Jan, Apr, Jul, or Oct).
 func (d Date) StartOfQuarter() Date {
